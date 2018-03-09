@@ -1,9 +1,11 @@
-#include<stdio.h>
+	#include<stdio.h>
 void main() {
 	int plaza1 = 0, plaza2 = 0, i=0, opcion2; //Si plaza=0 esta vacia y si plaza=1 esta ocupada
 	char opcion;
 	char matricula[8], matricula1[8], matricula2[8];
 
+	system("color 1E");
+	
 	do{
 
 	printf("Seleccione una de estas opciones:\n");
