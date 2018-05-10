@@ -12,7 +12,7 @@ struct usuario {
 struct plaza {
 	int estado; // 0 - Libre / 1 - Ocupada
 	char tipo; // M - Moto / C - Coche
-	char matricula[8]; // Formato de la matrícula: NNNNLLL
+	char matricula[8]; // Formato de la matrÃ­cula: NNNNLLL
 };
 
 char menu();
@@ -180,7 +180,7 @@ void main() {
 	system("PAUSE");
 }
 
-char menu() {  //muestra el menu de opciones al usuario, pide la opcion por pantalla y devuelve el valor de la opción seleccionada.
+char menu() {  //muestra el menu de opciones al usuario, pide la opcion por pantalla y devuelve el valor de la opciÃ³n seleccionada.
 
 	char opcion;
 
@@ -200,7 +200,7 @@ char menu() {  //muestra el menu de opciones al usuario, pide la opcion por pant
 	return opcion;
 }
 
-int esMatriculaValida(char matricula[]) { //comprueba que la matrícula del vehículo tenga el formato correcto: DDDDLLL, siendo D un caracter dígito del 0 al 9 y L una consonante. La función devuelve un booleano 
+int esMatriculaValida(char matricula[]) { //comprueba que la matrÃ­cula del vehÃ­culo tenga el formato correcto: DDDDLLL, siendo D un caracter dÃ­gito del 0 al 9 y L una consonante. La funciÃ³n devuelve un booleano 
 
 	int k = 0, i = 0; //variable bandera inicialmente nula
 
@@ -220,12 +220,13 @@ int esMatriculaValida(char matricula[]) { //comprueba que la matrícula del vehíc
 	return 1;
 }
 
-int esDigitoValido(char caracter) { //comprueba que sea un caracter dígito del 0 al 9
+int esDigitoValido(char caracter) { //comprueba que sea un caracter dÃ­gito del 0 al 9
 	if ((caracter < '0') || (caracter > '9')) {
 		return 0;
 	}
 	return 1;
 }
+
 
 int esLetraValida(char caracter) { //comprueba que sea un caracter consonante
 	if (caracter >= 'a' && caracter <= 'z') {
@@ -237,7 +238,7 @@ int esLetraValida(char caracter) { //comprueba que sea un caracter consonante
 	return 1;
 }
 
-int existeUsuario(struct usuario usuarioValido, char username[], char password[]) {//comprueba que el username y password introducidos coinciden con los datos de un usuarioValido. Esta función será invocada para comprobar que los datos introducidos por teclado coinciden con el usuario ya registrado en el sistema. 
+int existeUsuario(struct usuario usuarioValido, char username[], char password[]) {//comprueba que el username y password introducidos coinciden con los datos de un usuarioValido. Esta funciÃ³n serÃ¡ invocada para comprobar que los datos introducidos por teclado coinciden con el usuario ya registrado en el sistema. 
 
 	int j = 0, k = 0, i = 0;
 
@@ -248,7 +249,7 @@ int existeUsuario(struct usuario usuarioValido, char username[], char password[]
 		return 1;
 }
 
-void recuento(struct plaza aparcamiento[], int dim, int *nLibresCoches, int *nLibresMotos) {//calcula el número de plazas libres de coches y motos que hay disponibles.
+void recuento(struct plaza aparcamiento[], int dim, int *nLibresCoches, int *nLibresMotos) {//calcula el nÃºmero de plazas libres de coches y motos que hay disponibles.
 	int i;
 	*nLibresCoches = 0;
 	*nLibresMotos = 0;
@@ -270,7 +271,7 @@ void recuento(struct plaza aparcamiento[], int dim, int *nLibresCoches, int *nLi
 }
 
 void inicializar(struct plaza aparcamiento[], int dim) { //dar un valor inicial al aparcamiento, en la cual se inicialicen los estados como libres y los tipos de cada una de las plazas
-
+	int j;
 	int i;
 
 	for (i = 0; i < dim; i++) {
@@ -283,9 +284,15 @@ void inicializar(struct plaza aparcamiento[], int dim) { //dar un valor inicial 
 	for (i = (dim / 3); i < dim; i++) {
 		aparcamiento[i].tipo = 'C';
 	}
+	for (i = 0; i < dim; i++) {
+		for (j = 0; j < 7; j++) {
+			aparcamiento[i].matricula[j]= '-';
+		}
+		aparcamiento[i].matricula[7] = '\0';
+	}
 }
 
-int buscarPlazaLibre(struct plaza aparcamiento[], int dim, char tipo) { //devuelve el número de plaza libre del aparcamiento para un determinado tipo de vehículo. Si no hay ninguna plaza libre, la función devuelve -1
+int buscarPlazaLibre(struct plaza aparcamiento[], int dim, char tipo) { //devuelve el nÃºmero de plaza libre del aparcamiento para un determinado tipo de vehÃ­culo. Si no hay ninguna plaza libre, la funciÃ³n devuelve -1
 	int i;
 	for (i = 0; i < dim; i++) {
 		if ((aparcamiento[i].tipo == tipo)&&(aparcamiento[i].estado==0)) {
@@ -296,7 +303,7 @@ int buscarPlazaLibre(struct plaza aparcamiento[], int dim, char tipo) { //devuel
 	return -1;
 }
 
-int buscarVehiculo(struct plaza aparcamiento[], int dim, char matricula[]) { //devuelve el número de plaza donde se encuentra aparcado el vehículo. Si no encuentra ningún vehículo con dicha matrícula, la función devuelve -1
+int buscarVehiculo(struct plaza aparcamiento[], int dim, char matricula[]) { //devuelve el nÃºmero de plaza donde se encuentra aparcado el vehÃ­culo. Si no encuentra ningÃºn vehÃ­culo con dicha matrÃ­cula, la funciÃ³n devuelve -1
 	int i, j;
 
 	for (i = 0; i < dim; i++) {
